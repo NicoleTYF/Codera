@@ -18,11 +18,11 @@ I think 11 out of 15 them was new to me (only know Oracle DB, SQL*Plus, Bootstra
 **IDE** - `Eclipse enterprise` + `Maven` to manage dependencies
 
 ---
-**Frontend** - `ReactJS` framework + `Bootstrap 4` + `NodeJS` server + `REST` API
+**Frontend** - `ReactJS` framework + `Bootstrap` + `NodeJS` server + `REST` API + `Jest` UI testing + `Postman` API testing & documentation 
 
 ---
 
-**Backend** - `Spring boot` MVC framework + `Hibernate` + `JPA` + `Tomcat` server 
+**Backend** - `Spring boot` MVC framework + `Hibernate` + `JPA` + `Tomcat` server + `JUnit 5` testing + `JavaDoc` documentation 
 
 ---
 
