@@ -12,7 +12,7 @@ A web application for programming error and solution storage
 video: https://youtu.be/FxkfDnX9NW0 
 
 ## 🧰 Tech stack
-I think 11 out of 15 them are new to me (only know Oracle DB, SQL*Plus, Bootstrap, Junit and JavaDoc before this) <br/> <br/>
+I think 11 out of 15 them was new to me (only know Oracle DB, SQL*Plus, Bootstrap, Junit and JavaDoc before this) <br/> <br/>
 <img src="https://github.com/NicoleTYF/Codera/blob/main/code_era/public/img/techstacks.png" width="800px" /> 
 
 **IDE** - Eclipse enterprise + Maven to manage dependencies
