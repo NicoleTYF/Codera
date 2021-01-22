@@ -22,7 +22,7 @@ I think 11 out of 15 them was new to me (only know Oracle DB, SQL*Plus, Bootstra
 
 ---
 
-**Backend** - `Spring boot` MVC framework + `Hibernate` + `JPA` + `Tomcat server`
+**Backend** - `Spring boot` MVC framework + `Hibernate` + `JPA` + `Tomcat` server 
 
 ---
 
