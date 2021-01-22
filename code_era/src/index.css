@@ -1,0 +1,209 @@
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.ui.breadcrumb, i.icon.angle.right {
+
+	font-size: 16px;
+	font-weight: bold;
+	background-color: salmon !important; color: white;
+}
+
+.ui.breadcrumb a {
+	text-decoration: underline !important;
+}
+
+/*
+#fixListTitle {
+	color: grey;
+}
+*/
+
+#proLangLabel {
+	float: right; 
+	margin-left: 20px;
+}
+
+select {
+	width:  30%;
+	height: 40px;
+	border: 2px solid #ddd;
+	font-weight: bold;
+}
+
+#ckeditor {
+	width:  96%;
+	height: 100px;
+	padding: 12px;
+}
+
+input {
+	height: 40px;	
+	padding: 12px;
+}
+
+
+input[type=text], textarea {
+    border: 2px solid #ddd;
+    /* color: #7f0019; */
+    font-weight: bold;
+}
+
+.react-tagsinput {
+	width:  96%;
+	color:  #7f0019;
+	border: none; 
+	border-bottom: 2px solid #ddd;
+	background-color: transparent;
+}
+
+.react-tagsinput input {
+	border: none;
+}
+
+.react-tagsinput-tag {
+  background-color: #ddd; 
+  color: grey;
+  border: none;
+}
+
+#addFixBtn {
+	width:  100%;
+	color:  rgb(0, 164, 171);
+    cursor: pointer;
+    bottom: 57px;
+    height: 60px;
+    border: 4px rgb(0, 164, 171) dotted;  
+    border-radius: 0px;
+    font-weight: thin;
+    background-color: transparent; 
+}
+
+#addFixBtn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.3s;
+}
+
+#addFixBtn span:after {
+  content: ' Add';
+  position: absolute;
+  opacity: 0;
+  top:    -1.4px;
+  right: -20px; 
+  font-size: 22px; 
+  font-family: nunito thin;
+  font-weight: thin;
+  transition: 0.3s;
+}
+
+#addFixBtn:hover span {
+  padding-right: 47px;
+}
+
+#addFixBtn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#backBtn {
+	width: 215px;
+	margin-top: 24%;
+	margin-left: -15px;
+    cursor: pointer;
+    bottom: 7px;
+    transition: all 0.3s;  
+    border-radius: 0px;
+    font-weight: bold;
+    box-shadow:    0px 7px 0px 0px rgba(170,170,170,1);
+    background-image: linear-gradient(to bottom right, #eee, #ddd);
+}
+
+button[type=submit] {
+	width: 216px;
+	margin-top: 24%;
+	margin-left: 0px;
+	color: white;
+	bottom: 7px;
+	transition:    all 0.3s;
+	box-shadow:    0px 7px 0px 0px rgba(242, 82, 56,1);
+	border-radius: 0px;
+	font-weight:   bold;
+	background-image: linear-gradient(to bottom right, #ff512f, #ff9966);
+}
+
+button[type=submit]:hover, #backBtn:hover {
+	transform:     translateY(7px); 
+	box-shadow:    0px 0px 0px 0px rgba(170,170,170,1);
+}
+
+::placeholder {
+	font-weight: normal;
+}
+
+.empty {
+	position: relative;
+	max-height: auto;
+	margin-left:  -3px; 
+	width: 120%;
+	overflow: hidden;
+}
+
+#dragList {
+	background-color: transparent;
+}
+
+#dragList div {
+	height:  146px;
+	padding: 10px;
+	margin-top: 20px;
+	border-radius: 5px; 
+	background-color: white;
+}
+
+#viewList div {
+	padding: 20px;
+	margin-top: 20px;
+	border-radius: 5px; 
+	background-color: white;
+}
+
+#dragList button {
+	float: right; 
+	margin-top: 20px;
+}
+
+.ck-editor__editable_inline {
+	min-height: 200px; 
+	overflow: scroll;
+	max-height: 200px;
+}
+
+.fixModal {
+	max-height: 520px;
+}
+
+.ui.small.modal {
+	margin: auto;
+}
+
+.icon.close {
+	color: white;
+}
+
+
+form {
+  bottom: 40px;
+  border-radius: 5px;
+  padding: 14px 70px 0px 15px;
+  text-align: left;
+}
