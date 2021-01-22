@@ -28,6 +28,8 @@ I think 11 out of 15 them are new to me (only know Oracle DB, SQL*Plus, Bootstra
 
 **Database** - H2 database for testing data + Oracle database + SQL*Plus server
 
+---
+
 ## 📄 &nbsp; Documentation 
 API Documentation with Postman: https://documenter.getpostman.com/view/14239920/TVza9thD  
 Backend JavaDoc: https://github.com/NicoleTYF/Codera/tree/main/javadoc (need to clone this project to see)
