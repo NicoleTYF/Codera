@@ -12,15 +12,19 @@ A web application for programming error and solution storage
 video: https://youtu.be/FxkfDnX9NW0 
 
 ## 🧰 Tech stack
+I think 11 out of 15 them are new to me (only know Oracle DB, SQL*Plus, Bootstrap, Junit and JavaDoc before this) <br/> <br/>
 <img src="https://github.com/NicoleTYF/Codera/blob/main/code_era/public/img/techstacks.png" width="800px" /> 
-I think 11 out of 15 them are new to me (only know Oracle DB, SQL*Plus, Bootstrap, Junit and JavaDoc before this)
-
 
 **IDE** - Eclipse enterprise + Maven to manage dependencies
 
+---
 **Frontend** - ReactJS framework + Bootstrap 4 + NodeJS server
 
+---
+
 **Backend** - Spring boot MVC framework + Hibernate + JPA + Tomcat server
+
+---
 
 **Database** - H2 database for testing data + Oracle database + SQL*Plus server
 
