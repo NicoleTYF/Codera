@@ -23,8 +23,8 @@ import java.net.URI;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 // File references
 import com.codeEra.code_era.model.Fix;
-import com.codeEra.code_era.repository.BugRepository;
-import com.codeEra.code_era.repository.FixRepository;
+import com.codeEra.code_era.service.BugService;
+import com.codeEra.code_era.service.FixService;
 import com.codeEra.code_era.exception.ResourceNotFoundException;
 
 /** 
@@ -37,11 +37,7 @@ public class FixController {
 	  
 	  /** The data store of the Bug table. */
 	  @Autowired
-	  private FixRepository fixRepository;
-	  
-	  /** The data store of the Fix table. */
-	  @Autowired
-	  private BugRepository bugRepository;
+	  private FixService fixService;
 
 	  /** 
 	   * GET API for retrieving all Fixes from the data store. 
@@ -53,7 +49,7 @@ public class FixController {
 	  @GetMapping("/{username}/bugs/{parentId}/fixes")
 	  public List<Fix> getAllItem(@PathVariable String username, 
 			  @PathVariable (value = "parentId") long parentId, Pageable pageable) {
-		  return fixRepository.findByBugId(parentId, pageable).getContent();
+		  return fixService.findByBugId(parentId, pageable);
 	  } 
 	  
 	  /** 
@@ -68,21 +64,11 @@ public class FixController {
 			  @PathVariable (value = "parentId") long parentId,
               @Valid @RequestBody Fix createdItem) {
 		  
-		  URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
-		    		buildAndExpand(createdItem.getId()).toUri();
-		  
 		  // Set variables to update the item
-	      return bugRepository.findById(parentId).map(itemParent -> { 
-			    createdItem.setBug(itemParent);
-			    fixRepository.save(
-			    		new Fix(createdItem.getId(), 
-					    createdItem.getTitle(), 
-					    createdItem.getSolution(), 
-					    createdItem.getNoOfTimesWorked(), 
-			    		createdItem.getBug()));
-			    ResponseEntity.created(uri).build();
-	            return new ResponseEntity<Fix>(createdItem, HttpStatus.OK);
-	      }).orElseThrow(() -> new ResourceNotFoundException("Parent ID " + parentId + " not found"));
+	      fixService.create(parentId, createdItem); 
+
+	      // If no ResourceNotFoundException returned, return OK HttpStatus
+          return new ResponseEntity<Fix>(createdItem, HttpStatus.OK);
 	  }
 	  
 	  /** 
@@ -97,20 +83,10 @@ public class FixController {
 	  public ResponseEntity<?> updateItem(@PathVariable (value = "parentId") long parentId,
 	                             @PathVariable (value = "id") long id,
 	                             @Valid @RequestBody Fix postRequest) {
-		if(!bugRepository.existsById(parentId)) {
-		    throw new ResourceNotFoundException("Bug ID " + parentId + " not found");
-		}
+		fixService.updateItem(parentId, id, postRequest);
 		
-		// Set variables to update the item
-        return fixRepository.findById(id).map(updateItem -> {
-        	updateItem.setId(postRequest.getId()); 
-		    updateItem.setTitle(postRequest.getTitle()); 
-		    updateItem.setSolution(postRequest.getSolution()); 
-		    updateItem.setNoOfTimesWorked(postRequest.getNoOfTimesWorked()); 
-		    updateItem.setBug(bugRepository.findById(parentId).get());
-		    fixRepository.save(updateItem);
-            return new ResponseEntity<Fix>(updateItem, HttpStatus.OK);
-        }).orElseThrow(() -> new ResourceNotFoundException("BugId " + id + " not found"));
+        // If no ResourceNotFoundException returned, return OK HttpStatus
+        return new ResponseEntity<Fix>(postRequest, HttpStatus.OK);
 	  }
 	  
 	  /** 
@@ -123,11 +99,10 @@ public class FixController {
 	  @DeleteMapping("/{username}/bugs/{parentId}/fixes/{id}")
 	  public ResponseEntity<?> deleteItem(@PathVariable (value = "parentId") long parentId,
 	                            @PathVariable (value = "id") long id) {
-	        return fixRepository.findByIdAndBugId(id, parentId).map(deleteItem -> {
-	            fixRepository.delete(deleteItem);
-	            return ResponseEntity.ok().build();
-	        }).orElseThrow(() -> new ResourceNotFoundException("Fix not found with ID " + id + 
-	        		" and parent ID " + parentId));
+	     fixService.deleteItem(parentId, id);
+	     
+	     // If no ResourceNotFoundException returned, return OK HttpStatus
+	     return ResponseEntity.ok().build();
 	  }
 	  
 }
