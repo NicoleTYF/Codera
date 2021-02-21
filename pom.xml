@@ -43,7 +43,7 @@
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<scope>system</scope>
-			<systemPath>(hidden path for security reason, it's in your project file)</systemPath>
+			<systemPath>C:\Users\Nicole\Codera\ojdbc8.jar</systemPath>
 		</dependency>
 		<!--  <dependency>            
 		    <groupId>com.h2database</groupId>            
@@ -63,8 +63,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+  			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
 
 		<!-- HIBERNATE -->
+		
 		
 		<!-- JAVA RELATED -->
 		<dependency>

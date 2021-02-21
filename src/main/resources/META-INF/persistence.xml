@@ -7,9 +7,9 @@
      
     <persistence-unit name="CoderaDB">
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:(hiddenName)" />
-            <property name="javax.persistence.jdbc.user" value="(hiddenName)" />
-            <property name="javax.persistence.jdbc.password" value="(hiddenPswd)" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:Nicole" />
+            <property name="javax.persistence.jdbc.user" value="CODERADB" />
+            <property name="javax.persistence.jdbc.password" value="SPRING" />
             <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect" />
         </properties>

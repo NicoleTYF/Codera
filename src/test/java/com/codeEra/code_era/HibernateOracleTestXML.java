@@ -8,7 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import com.codeEra.code_era.model.Bug;
  
 /**
- * Test session connection between Hiberate and with the given 
+ * Test session connection between Hibernate and with the given 
  * Oracle database connection string and credentials. 
  */
 public class HibernateOracleTestXML {
