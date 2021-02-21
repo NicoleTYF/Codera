@@ -11,6 +11,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { Label, Icon, Popup, Divider, Header } from 'semantic-ui-react' 
 
 import TagLabels from './../component/others/TagLabels'; 
+import CategoryLabels from './../component/others/CategoryLabels'; 
 
 import CheckBoxSelect from 'react-multiselect-checkboxes';
 
@@ -77,14 +78,14 @@ class ListItemView extends Component {
 
     render() {
 		const progLangOptions = PROGLANG; 
-		const categoryOptions = groupedOptions;
+		const categoryOptions = groupedOptions; 
 		
         return (
 			<div className="row">
 				{/* LEFT PANEL */}
 	            <div id="List" className="col-8">
 					<br/>
-					{/* HIDDEN MESSAGE BOX, CALLED WHEN ITEM IS DELETED */}
+					{/* HIDDEN MESSAGE BOX, CALLED WHEN AN ITEM IS DELETED */}
 					{this.state.message && <div className="alert alert-success">
 						{this.state.message}</div>}
 						
@@ -111,15 +112,15 @@ class ListItemView extends Component {
 	                                <tr key={data.id}> 
 										<div className="row d-flex pl-2 ml-3 mt-3" id="categoryText"> 
 											{/* PROGRAMMING LANGUAGE OF THE RECORD */} 
-											<p id="progLangtext">{data.progammingLanguage} | &nbsp; 
-												{/* LIST ALL CATEGORIES OF THE RECORD */}
-												{data.category.split(", ").map((c, index) => {
-							               		  	 return c + " • ";
-							              		})}
+											<Label horizontal id="progLangtext">{data.progammingLanguage}</Label>
+											<p> | &nbsp; 
+											
+											{/* LIST ALL CATEGORIES OF THE RECORD */}
+											<CategoryLabels categories={data.category} />
 											</p><br/>  
 											
 											{/* TOP LEFT LIGHT BULB ICON */}
-											<Popup content="{data.fix.length} Solutions" trigger={
+											<Popup content={data.fix.length + " Solution(s)"} trigger={
 												<div className="d-flex actionTools ml-auto mr-3 solu">
 													<Icon name="lightbulb outline" /> 
 													{data.fix.length} &emsp;&nbsp;
@@ -137,6 +138,7 @@ class ListItemView extends Component {
 												 onClick={ (id) => {this.actionBtnOnClick("view", data.id)} }
 												 dangerouslySetInnerHTML={{__html: data.description}} />
 											<br/>
+											
 											{/* TAGS */}
 											<TagLabels class="float-right mr-4" id="tagList" tags={data.tags} />
 											

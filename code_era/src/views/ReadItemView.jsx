@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import BugDataService from '../service/BugDataService.js'; 
 import FixDataService from '../service/FixDataService.js'; 
 
-import TagLabels from './../component/others/TagLabels';
+import TagLabels from './../component/others/TagLabels'; 
+import CategoryLabels from './../component/others/CategoryLabels'; 
 import Breadcrumb from './../component/others/BreadcrumbUI';
 
 import { Label, Button, Icon, List, Modal, Segment } from "semantic-ui-react" 
@@ -47,8 +48,8 @@ class ReadItemView extends Component {
 			data: response.data, 
 			name: response.data.title, 
 			progLang: response.data.progammingLanguage, 
-			category: response.data.category.split(", "), 
-	        tags: response.data.tags.split(", "), 
+			category: response.data.category, 
+	        tags: response.data.tags, 
             description: response.data.description,   
 			fix: response.data.fix, 
         }))
@@ -172,18 +173,20 @@ class ReadItemView extends Component {
 	}
 
     render() {
-		let { id, name, progLang, category, description, fix } = this.state
-		const { tags, tag } = this.state; 
+		let { id, name, progLang, category, tags, description, fix } = this.state
 
 	    return (
 	        <div class="container">
-				<Breadcrumb id={this.state.id} condition="READ" name={this.state.name} 
-					history={this.props.history} /> 
+				<Breadcrumb id={id} condition="READ" name={name} history={this.props.history} /> 
 				<br/>
 				<div class="row d-flex pl-2 ml-3 mt-2" id="categoryText"> 
-					<p id="progLangtext">{progLang} | {category.map((c, index) => {
-		                  return c + " • ";
-		                })}</p>  
+					{/* PROGRAMMING LANGUAGE OF THE RECORD */} 
+					<Label horizontal id="progLangtext">{progLang}</Label>
+					<p> | &nbsp; 
+					
+					{/* LIST ALL CATEGORIES OF THE RECORD */}
+					<CategoryLabels categories={category} />
+					</p><br/>  
 				</div>
 				  
 				<div class=" pl-3 ml-3">
@@ -201,12 +204,9 @@ class ReadItemView extends Component {
            			<div class="bg-white p-3 mr-4 shadow" 
 						dangerouslySetInnerHTML={{__html: description}} />
 					<br/>
-					 <div class="float-right mr-4" id="tagList">
-						{this.state.tags.map((tag, index) => {
-		                  return <Label as='a' tag color="teal" class="p-4 ml-2">
-							        {tag} </Label>;
-		                })}
-					</div>
+					
+					{/* TAGS */}
+					<TagLabels class="float-right mr-4" id="tagList" tags={tags} />
 				
 				
 			<br/><br/> <hr/>

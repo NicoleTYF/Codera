@@ -28,7 +28,7 @@ html {
 }
 
 #progLangtext {
-	color: #7f0019;
+	max-height: 23px;
 	font-weight: bold;
 }
 

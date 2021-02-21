@@ -21,6 +21,9 @@ function CreateSolutionModal(props) {
 	let newFixItem = []
 	
 	function CreateSolutionModal(props) {
+		
+		
+		
 		this.onFixTitleChange = this.onFixTitleChange.bind(this); 
 		this.onFixEditorChange = this.onFixEditorChange.bind(this); 
 	}
