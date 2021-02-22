@@ -1,29 +1,19 @@
-import React, { Component } from 'react'
-
-import { Label } from "semantic-ui-react" 
-
+import React from 'react'
 
 class CategoryLabels extends React.Component{
-
-	constructor(props) {
-		super(props) 
-
-	}
 	
-	CategoryLabels()	{	
+	CategoryLabels() {	
 			
 		// If array is not empty, split the tagList (string)
 		if(this.props.categories) {
 			if(this.props.categories.includes(", ")) {
 				return <span>
-				{this.props.categories.split(", ").
-					map((c) => {
+				{this.props.categories.split(", ").map((c) => {
 						return c + " • ";
 				})}</span>;
 			}
 			
 			return <span> {this.props.categories} </span>;
-			
 		} 
 	}
 	

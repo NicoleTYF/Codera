@@ -21,6 +21,10 @@ code {
 	text-decoration: underline !important;
 }
 
+.ui.label {
+	padding: 1.14%; 
+}
+
 /*
 #fixListTitle {
 	color: grey;
@@ -70,9 +74,9 @@ input[type=text], textarea {
 }
 
 .react-tagsinput-tag {
-  background-color: #ddd; 
-  color: grey;
-  border: none;
+	background-color: #ddd; 
+	color: grey;
+	border: none; 
 }
 
 #addFixBtn {

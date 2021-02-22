@@ -36,9 +36,8 @@ class ListItemView extends Component {
 
 	/* RETRIEVE ALL RECORDS ON START / ON DELETE  */
 	refreshList() {
-    BugDataService.retrieveList() 
-        .then(
-            response => {
+    	BugDataService.retrieveList() 
+        .then(response => {
                 console.log(response);
 				this.setState({ data: response.data })
             }
@@ -52,21 +51,22 @@ class ListItemView extends Component {
 	
 	/* ADD, UPDATE OR DELETE RECORD FROM THE LIST */
 	actionBtnOnClick(purpose, id) {
-		if(purpose == "view") {
-			console.log('view ' + id)
-		    this.props.history.push(`/bugs/${id}/view`)
-		} else if(purpose == "update") {
-			console.log('update ' + id)
-	   	    this.props.history.push(`/bugs/${id}`) 
-		} else {
+		if(purpose === "delete") {
 			console.log('delete ' + id)
 			BugDataService.deleteItem(id)
         	.then(response => {
                 this.setState({ message: `Delete item ${id} Successful` })
-                this.refreshList()
-            	}
-     	    )
+				this.props.history.push(``)
+            })
 		}
+		
+		if(purpose === "view") {
+			console.log('view ' + id)
+		    this.props.history.push(`/bugs/${id}/view`)
+		} else if(purpose === "update") {
+			console.log('update ' + id)
+	   	    this.props.history.push(`/bugs/${id}`) 
+		} 
 	}
 	
 	/* SEARCH THE LIST WITH THE INPUTS FROM SERACH BAR */
@@ -95,7 +95,7 @@ class ListItemView extends Component {
 						{/* SEARCH BAR */}
 						<input type="text" placeholder="Search..." id="searchBar" />
 						<button className="ui icon button" id="searchBtn"> 
-							<Icon aria-hidden="true" name="search" color="white" />
+							<Icon aria-hidden="true" name="search" />
 						</button>
 						{/* "+ ADD NEW"  BUTTON */}
 						<button className="col-2 ui btn btn-sm button attached right" id="addBtn" 
@@ -135,12 +135,12 @@ class ListItemView extends Component {
 											
 											{/* DESCRIPTION */}
 	                               			<div className="desc truncate text-muted" 
-												 onClick={ (id) => {this.actionBtnOnClick("view", data.id)} }
+												 onClick={() => this.actionBtnOnClick("view", data.id)}
 												 dangerouslySetInnerHTML={{__html: data.description}} />
 											<br/>
 											
 											{/* TAGS */}
-											<TagLabels class="float-right mr-4" id="tagList" tags={data.tags} />
+											<TagLabels className="float-right mr-4" id="tagList" tags={data.tags} />
 											
 											<div className="d-flex actionTools ml-auto mr-3 b-5"> 
 												{/* EDIT BUTTON */}

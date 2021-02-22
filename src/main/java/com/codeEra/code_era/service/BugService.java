@@ -7,6 +7,7 @@ import java.util.Optional;
 // Spring Data
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 // Other Classes
@@ -31,8 +32,8 @@ public class BugService {
      * @param pageable the list to store the retrieved Bugs 
      * @return all the Bugs in the data store 
      */
-    public List<Bug> findAllByOrderByIdAsc (Pageable pageable) {
-	    return this.bugRepository.findAllByOrderByIdAsc(pageable).getContent();
+    public List<Bug> findAllByOrderByIdDesc (Pageable pageable) {
+	    return this.bugRepository.findAllByOrderByIdDesc(pageable).getContent();
     }
   
     /** 
@@ -51,7 +52,7 @@ public class BugService {
      */
     public Bug create (Bug item) {
         return bugRepository.saveAndFlush(new Bug(item.getCategory(), item.getProgammingLanguage(), 
-        		  item.getTags(), item.getTitle(), item.getUserId(), 5,
+        		  item.getTags(), item.getTitle(), item.getUserId(), bugRepository.count() + 1,
         		  item.getDescription()));
     }
   
@@ -83,10 +84,10 @@ public class BugService {
      * @return Server response indicating the item is deleted 
      * @exception ResourceNotFoundException return the message that the item cannot be found  
      */
-	public Bug deleteItem (long id) {
+	public ResponseEntity<?> deleteItem (long id) {
 		 return bugRepository.findById(id).map(item -> {
 	            bugRepository.delete(item);
-	            return item;
+	            return ResponseEntity.ok().build();
 	     }).orElseThrow(() -> new ResourceNotFoundException("BugId " + id + " not found")); 
 	}
 	

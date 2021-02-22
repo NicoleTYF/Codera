@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import { Breadcrumb } from "semantic-ui-react" 
 import { Data, Fullstack, Backend, Frontend, Others } from '../../data_categories.js'; 
 
 class ArrayToOptionConverter extends React.Component{
@@ -19,14 +18,15 @@ class ArrayToOptionConverter extends React.Component{
 	generateOptions(arr) {
 		return arr.map((c, index) => {
 				if(this.props.selected.includes(c.label)) {
-					return <option value={c.value} selected>{c.label}</option>;
+					return <option key={index} value={c.value} selected>{c.label}</option>;
 				}
-              return <option value={c.value}>{c.label}</option>;
+              return <option key={index} value={c.value}>{c.label}</option>;
         })
 	}
 	
 	render() {
-		return <select id="category" multiple name="category" onChange={this.props.categoryChange}> 
+		return <select id="category" multiple name="category" 
+					onChange={(event) => {this.props.onInputChange("category", event);}}> 
 					<optgroup label="DATA">
 						{this.generateOptions(this.state.Data)}
 					</optgroup>

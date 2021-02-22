@@ -1,66 +1,105 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import { Label, Button, Icon, Modal } from "semantic-ui-react" 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'; 
 
-/* TOP BAR & LOGO, ALWAYS CALLED IN App.js */
-function CreateSolutionModal(props) {
+let header = ""; 
+let button = "";
+
+/* Add/Edit Solution Window */
+class CreateSolutionModal extends React.Component {
 	
-	const [openAdd] = React.useState(false) 
-	
-	const header = "Add Solution" 
-	
-	const button = <button className="btn" type="button" id="addFixBtn"> 
-						<Icon name="add circle"/> 
-							<span>Add Solution</span>
-						</button>
-						
-	// let fixList = this.props.state.fix 
-	
-	let newFixItem = []
-	
-	function CreateSolutionModal(props) {
+	constructor(props) {
+		super(props) 
 		
+		this.state = {
+			open: false, 
+			newItem: this.props.newFixItem
+		}
 		
-		
+		this.assignValues = this.assignValues.bind(this); 
 		this.onFixTitleChange = this.onFixTitleChange.bind(this); 
 		this.onFixEditorChange = this.onFixEditorChange.bind(this); 
-	}
+		
+		this.assignValues();
+	} 			
 	
-	function onFixTitleChange(event) {
-		let newItem = {
-			id:  -1, 
-			title: event.target.value, 
-			solution: newFixItem.solution, 
-			noOfTimesWorked: 0, 
+	assignValues() {
+		if(this.props.purpose === "add") {
+			this.header = "Add Solution";  
+			this.button = <button className="btn" type="button" id="addFixBtn"> 
+							<span><Icon name="add circle" size="large" /> </span> 
+						 </button>;
+			
+		} else {
+			this.header = "Edit Solution";  
+			this.button =  <button className="btn btn-light mt-auto mb-auto r-0" type="button" title="Edit">
+						 <Icon name="edit" color="black"/> </button>; 
 		}
-		newFixItem = newItem;   
 	}
 	
-	function onFixEditorChange(data) {
+	onFixTitleChange(event) {
 		try { 
 			let newItem = {
-				id: this.state.newFixItem.id, 
-				title: this.state.newFixItem.title, 
-				solution: data, 
-				noOfTimesWorked: this.state.newFixItem.noOfTimesWorked, 
-				bug: this.state.newFixItem.bug 
+				id:  this.state.newItem.id, 
+				title: event.target.value, 
+				solution: this.state.newItem.solution, 
+				noOfTimesWorked: 0, 
+				bug: this.props.bug
 			}
-			this.setState({newFixItem: newItem});  
+			this.setState({newItem: newItem}); 
 		} catch (ex) { }
 	}
 	
-    return (
-			<Modal className="bg-light fixModal" size="small" closeIcon   
-    		 onClose={() => this.props.setState({openAdd: false})} 
-			 onOpen={() => this.props.setState({openAdd: true})}
-  			 open={openAdd} trigger={button}> 
-			      <Modal.Header>{header}</Modal.Header>
+	onFixEditorChange(data) {
+		try { 
+			let newItem = {
+				id: this.state.newItem.id, 
+				title: this.state.newItem.title, 
+				solution: data, 
+				noOfTimesWorked: this.state.newItem.noOfTimesWorked, 
+				bug: this.props.bug
+			}
+			this.setState({newItem: newItem});  
+		} catch (ex) { }
+	}
+	
+	onFixModalClose(index) {
+		var arr = this.props.fixList.map((x) => x);
+		
+		if(this.props.purpose === "add") {
+			let newItem = {
+				id: arr.length + 1, 
+				noOfTimesWorked: 0, 
+				title: this.state.newItem.title, 
+				solution: this.state.newItem.solution, 
+				bug: this.props.bug
+			}; 	
+			
+			arr.push(newItem); 
+			console.log(index + " Fix item created"); 
+		} else {
+			arr[index] = this.state.newItem; 
+			console.log(index + " Fix item updated"); 
+		}
+		
+		this.props.modifyFix(arr); 
+		
+		this.setState({open: false});
+	}
+	
+    render() {
+		this.assignValues();
+			return (<Modal className="bg-light fixModal" size="small" closeIcon   
+    		 onClose={() => this.setState({open: false})} 
+			 onOpen={() => this.setState({open: true})}
+  			 open={this.state.open} trigger={this.button}> 
+			      <Modal.Header>{this.header}</Modal.Header>
 			      <Modal.Content>			 
 			          &emsp;<Label as='a' color='red' ribbon>Title</Label> <br/>
 			          <input className="col-7" type="text" placeholder="e.g. Cx001: OutOfBoundsException" 
-							onChange={onFixTitleChange} name="fixName" /> 
+							onChange={this.onFixTitleChange} name="fixName" /> 
 					  <br/><br/>
 					  &emsp;<Label as='a' color='red' ribbon>Description</Label> <br/>
 					  <CKEditor
@@ -68,7 +107,7 @@ function CreateSolutionModal(props) {
 			            editor={ClassicEditor} 
 						onChange={(event, editor) => {
 					              	const data = editor.getData();
-					                 onFixEditorChange(data);
+					                 this.onFixEditorChange(data);
 					             }}
 			            placeholder="<p>e.g. Cause, Steps to reproduce...</p>" />
 					</Modal.Content>			      
@@ -77,12 +116,12 @@ function CreateSolutionModal(props) {
 			          content="Save"
 			          labelPosition='right'
 			          icon='checkmark'
-					  onClick={() => {this.props.onFixModalClose(-1)}}
+					  onClick={() => {this.onFixModalClose(this.state.newItem.id)}}
 			          positive
 			        />
 			      </Modal.Actions>
     		</Modal>
-        )
+	)}
 }
 
 export default CreateSolutionModal

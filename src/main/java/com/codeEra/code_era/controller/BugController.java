@@ -44,7 +44,7 @@ public class BugController {
 	   */
 	  @GetMapping("/{username}/bugs/")
 	  public List<Bug> getAllItems (@PathVariable String username, Pageable pageable) {
-		  return this.bugService.findAllByOrderByIdAsc(pageable);
+		  return this.bugService.findAllByOrderByIdDesc(pageable);
 	  }
 	  
 	  /** 
@@ -99,8 +99,7 @@ public class BugController {
 	   */
 	  @DeleteMapping("/{username}/bugs/{id}")
 	  public ResponseEntity<?> deleteItem (@PathVariable String username, @PathVariable long id) {
-		  bugService.deleteItem(id);
-	      return ResponseEntity.ok().build();
+		  return bugService.deleteItem(id); 
 	  }
 	  
 	  /** 

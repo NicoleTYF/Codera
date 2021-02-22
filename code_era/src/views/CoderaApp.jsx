@@ -13,9 +13,10 @@ import CreateItemView from './CreateItemView';
 /* TOP BAR & LOGO, ALWAYS CALLED IN App.js */
 class CoderaApp extends Component {
 	
+	/*
 	constructor(props) {
         super(props)
-	}
+	} */
 	
 	/* REDIRECT TO ListItemView WHEN "CODERA" LOGO IS CLICKED */
 	homeBtnOnClick() {
@@ -35,7 +36,7 @@ class CoderaApp extends Component {
 						return <Redirect to={{ pathname: "/login" }} />}} style={{ textAlign: "left", 
 						color: "white", fontFamily: "Nunito thin", fontWeight: "thin",fontSize: "37px" }}>
 						<FontAwesomeIcon icon={ faObjectGroup } color="#f5f5dc" /> 
-						CODERA
+						&nbsp;CODERA
 					</h1>
 					{/* HORIZONTAL LINE */}
 				    <hr className="mt-auto" color="white" height="14px" />

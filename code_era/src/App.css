@@ -17,6 +17,16 @@ html {
 	color: DodgerBlue;
 }
 
+.breadcrumb button {
+	color: white;  
+	border: none; 
+	font-weight: bold; 
+	text-decoration: underline;
+	background-color: transparent; 
+}
+
+.breadcrumb button:focus { outline: 0; }
+
 .truncatecategory {
 	display:            -webkit-box;
     -webkit-line-clamp: 1;

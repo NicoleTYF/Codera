@@ -55,7 +55,7 @@ class BugControllerTest {
         testBug2.setTags("test tag 1, test tag , test tag 3");
         testBug2.setProgammingLanguage("Java"); 
  
-        when(bugRepoMock.findAllByOrderByIdAsc(pageable).getContent()).
+        when(bugRepoMock.findAllByOrderByIdDesc(pageable).getContent()).
         	thenReturn(Arrays.asList(testBug1, testBug2));
         
         //Retrieve GET API's array

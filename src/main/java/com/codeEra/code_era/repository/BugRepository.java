@@ -25,7 +25,7 @@ public interface BugRepository extends JpaRepository<Bug, Long> {
 	 * @param pageable  the list used to store retrieved records.  
 	 * @return a list of Bugs with matched titles  
 	 */
-	Page<Bug> findAllByOrderByIdAsc(Pageable pageable);
+	Page<Bug> findAllByOrderByIdDesc(Pageable pageable);
 	
 	/** 
 	 * Find all items using inputs from the search bar . 
